@@ -154,18 +154,6 @@
   .stat-block {
     border-left: 3px solid var(--gold);
     padding-left: 1.5rem;
-    opacity: 0;
-    transform: translateX(20px);
-    animation: slidein 0.5s ease forwards;
-  }
-  .stat-block:nth-child(1) { animation-delay: 0.2s; }
-  .stat-block:nth-child(2) { animation-delay: 0.35s; }
-  .stat-block:nth-child(3) { animation-delay: 0.5s; }
-  .stat-block:nth-child(4) { animation-delay: 0.65s; }
-  .stat-block:nth-child(5) { animation-delay: 0.8s; }
-
-  @keyframes slidein {
-    to { opacity: 1; transform: translateX(0); }
   }
 
   .stat-label {
@@ -195,13 +183,6 @@
   section {
     padding: 5rem 0;
     border-bottom: 1px solid var(--rule);
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  section.visible {
-    opacity: 1;
-    transform: translateY(0);
   }
   section:last-child { border-bottom: none; }
 
@@ -743,9 +724,7 @@
 <!-- CONTACT -->
 <div class="contact-bar">
   <span>Jennifer Groh &mdash; Program Manager · Instructional Designer · PMP</span>
-  <a href="mailto:jennifergroh17@gmail.com">Get in Touch</a>
+  <a href="/cdn-cgi/l/email-protection#2c46494242454a495e4b5e43441d1b6c4b414d4540024f4341">Get in Touch</a>
 </div>
 
-<script>
-  // Scroll-triggered section reveals
-  const sections = document.querySelectorAll
+<script data-cfasync="false" src="/cdn-cgi/s
