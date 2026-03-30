@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Origin Story | Jennifer Groh</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --ink-light: #3d3d5c;
+    --cream: #f5f2ec;
+    --warm-white: #faf8f5;
+    --gold: #b8860b;
+    --gold-light: #d4a017;
+    --rust: #8b3a3a;
+    --rule: #d6d0c4;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    background: var(--warm-white);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(245,242,236,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-name {
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-link {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: opacity 0.2s;
+  }
+  .nav-link:hover { opacity: 0.7; }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--ink);
+    padding: 10rem 2rem 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    bottom: -150px; right: -150px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(184,134,11,0.12) 0%, transparent 70%);
+  }
+  .hero-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px; height: 1px;
+    background: var(--gold-light);
+  }
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 2rem;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+  .hero-desc {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.6);
+    max-width: 54ch;
+    line-height: 1.8;
+    border-left: 3px solid var(--gold);
+    padding-left: 1.5rem;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline-section {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--rule);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-bottom: 3.5rem;
+  }
+  .timeline-item:last-child { padding-bottom: 0; }
+
+  .timeline-dot {
+    position: absolute;
+    left: -2.45rem;
+    top: 0.35rem;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--warm-white);
+    border: 2px solid var(--rule);
+    transition: border-color 0.2s;
+  }
+  .timeline-item.milestone .timeline-dot {
+    background: var(--gold);
+    border-color: var(--gold);
+    width: 16px; height: 16px;
+    left: -2.55rem;
+    top: 0.28rem;
+  }
+  .timeline-item.critical .timeline-dot {
+    background: var(--rust);
+    border-color: var(--rust);
+    width: 16px; height: 16px;
+    left: -2.55rem;
+    top: 0.28rem;
+  }
+
+  .timeline-phase {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+  .timeline-item.critical .timeline-phase { color: var(--rust); }
+
+  .timeline-title {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+  .timeline-body {
+    font-size: 0.95rem;
+    color: var(--ink-light);
+    line-height: 1.8;
+    max-width: 58ch;
+  }
+  .timeline-body p + p { margin-top: 0.75rem; }
+
+  /* ── INSIGHT BLOCK ── */
+  .insight {
+    background: var(--cream);
+    border-left: 4px solid var(--gold);
+    padding: 1.25rem 1.5rem;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--ink);
+    line-height: 1.7;
+  }
+  .insight-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+
+  /* ── PIVOT SECTION ── */
+  .pivot-section {
+    background: var(--ink);
+    padding: 5rem 2rem;
+    margin: 2rem 0 0;
+  }
+  .pivot-inner {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .pivot-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    color: #fff;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+  .pivot-title em { color: var(--gold-light); font-style: italic; }
+  .pivot-body {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.85;
+    max-width: 58ch;
+    margin-bottom: 3rem;
+  }
+  .pivot-body p + p { margin-top: 1rem; }
+
+  .domain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 3rem;
+  }
+  .domain-cell {
+    background: var(--ink);
+    padding: 1.25rem 1.5rem;
+  }
+  .domain-icon {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  .domain-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 0.25rem;
+  }
+  .domain-desc {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.5;
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .cta-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .cta-title {
+    font-family: var(--serif);
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    color: var(--ink);
+    line-height: 1.2;
+    max-width: 20ch;
+  }
+  .cta-body {
+    font-size: 0.95rem;
+    color: var(--ink-light);
+    max-width: 52ch;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--ink);
+    color: #fff;
+    text-decoration: none;
+    padding: 0.85rem 2rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    width: fit-content;
+    transition: opacity 0.2s;
+  }
+  .cta-button:hover { opacity: 0.8; }
+  .cta-button span { font-size: 1rem; }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--gold);
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .footer span {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--ink);
+  }
+  .footer a {
+    background: var(--ink);
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1.5rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: opacity 0.2s;
+  }
+  .footer a:hover { opacity: 0.8; }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 1rem; }
+    .hero { padding: 8rem 1.5rem 5rem; }
+    .timeline-section { padding: 3rem 1.5rem; }
+    .cta-section { padding: 3rem 1.5rem; }
+    .pivot-section { padding: 3rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-name">Jennifer Groh</a>
+  <a href="https://jennifergroh17-pro.github.io/Case-Study/high_risk_remediation_case_study.html" class="nav-link">View Case Study →</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Origin Story</p>
+    <h1 class="hero-title">We bought a home.<br><em>Then the work began.</em></h1>
+    <p class="hero-desc">What started as a cooling issue in a newly purchased home became one of the most complex, multi-domain problems I have ever managed. This is the story of how I got there — and how I chose to respond.</p>
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<div class="timeline-section">
+  <p class="section-label">How it unfolded</p>
+
+  <div class="timeline">
+
+    <div class="timeline-item milestone">
+      <div class="timeline-dot"></div>
+      <p class="timeline-phase">July 2025 — Closing</p>
+      <h2 class="timeline-title">A home purchase. A fresh start.</h2>
+      <div class="timeline-body">
+        <p>We closed on our home in late July 2025. Like any major purchase, it came with optimism, plans, and the reasonable expectation that what we were buying was what had been represented to us.</p>
+        <p>Within days, that expectation began to erode.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <p class="timeline-phase">Phase 1 — First Signal</p>
+      <h2 class="timeline-title">The house would not cool.</h2>
+      <div class="timeline-body">
+        <p>The HVAC system failed to perform. What seemed like a straightforward mechanical issue prompted the first service call — and the first look under the surface of what we had purchased.</p>
+        <p>That first look raised more questions than it answered.</p>
+      </div>
+      <div class="insight">
+        <p class="insight-label">Process Note</p>
+        A single system failure is a maintenance issue. The same failure coupled with documentation irregularities is a signal worth investigating. I chose to investigate.
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <p class="timeline-phase">Phase 2 — Escalation</p>
+      <h2 class="timeline-title">Repair estimates kept coming.</h2>
+      <div class="timeline-body">
+        <p>What followed was a steady accumulation of findings. Each inspection surfaced something new. Estimates arrived. Contractors were called. And with every new finding, the picture grew more complex — not simpler.</p>
+        <p>The issues were not isolated. They were connected. A repair in one area revealed a dependency on another. What had looked like a list was revealing itself to be a system of failures.</p>
+      </div>
+      <div class="insight">
+        <p class="insight-label">Process Note</p>
+        The instinct at this stage is to fix things as fast as possible. I resisted that instinct. Uncoordinated repairs in a legally complex situation can eliminate leverage, destroy evidence, and create new liability. I slowed down and got structured.
+      </div>
+    </div>
+
+    <div class="timeline-item critical">
+      <div class="timeline-dot"></div>
+      <p class="timeline-phase">Phase 3 — The Scope Shift</p>
+      <h2 class="timeline-title">Foundation. Structure. Then the environment.</h2>
+      <div class="timeline-body">
+        <p>The turning point came when findings moved beyond mechanical systems into structural and environmental domains. Foundation concerns emerged. Engineering was brought in. And then environmental assessment revealed conditions that changed the nature of the situation entirely — including fungal growth classified at a level requiring professional remediation, and contamination consistent with a biohazard designation.</p>
+        <p>We were still living in the house.</p>
+        <p>This was no longer a repair problem. This was a program.</p>
+      </div>
+      <div class="insight">
+        <p class="insight-label">The Reframe</p>
+        The moment I stopped asking "what needs to be fixed next?" and started asking "what does a controlled response to a systemic failure look like?" — everything changed. Governance came first. Evidence came second. Action came third.
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <p class="timeline-phase">Phase 4 — The Build</p>
+      <h2 class="timeline-title">Building the framework while inside the problem.</h2>
+      <div class="timeline-body">
+        <p>With no external project management support, no dedicated team, and no precedent to follow, I built the response framework from scratch. That meant defining scope, establishing governance controls, engineering an evidence repository, modeling financial scenarios, and managing stakeholders across legal, technical, compliance, and regulatory domains — simultaneously.</p>
+        <p>The work happened in parallel with daily life. It required sustained discipline, emotional regulation, and the ability to think clearly under conditions of real personal risk.</p>
+      </div>
+      <div class="insight">
+        <p class="insight-label">Process Note</p>
+        I documented everything in real time. Not because I knew exactly how it would be used, but because I understood that in high-stakes situations, the person with the best records controls the narrative. Documentation became leverage.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PIVOT -->
+<div class="pivot-section">
+  <div class="pivot-inner">
+    <h2 class="pivot-title">Every domain.<br><em>At the same time.</em></h2>
+    <div class="pivot-body">
+      <p>By the time the full scope was visible, this situation touched every domain a program manager is trained to handle — and several that require specialized knowledge to navigate. None of them could be addressed in isolation. All of them had to move in parallel.</p>
+    </div>
+
+    <div class="domain-grid">
+      <div class="domain-cell">
+        <div class="domain-icon">🏗️</div>
+        <p class="domain-name">Structural</p>
+        <p class="domain-desc">Foundation integrity, load-bearing systems, engineering assessment</p>
+      </div>
+      <div class="domain-cell">
+        <div class="domain-icon">🌿</div>
+        <p class="domain-name">Environmental</p>
+        <p class="domain-desc">Fungal growth, biohazard contamination, remediation classification</p>
+      </div>
+      <div class="domain-cell">
+        <div class="domain-icon">⚡</div>
+        <p class="domain-name">Mechanical & Electrical</p>
+        <p class="domain-desc">HVAC failure, systems documentation, licensing irregularities</p>
+      </div>
+      <div class="domain-cell">
+        <div class="domain-icon">📋</div>
+        <p class="domain-name">Regulatory & Compliance</p>
+        <p class="domain-desc">Permitting, federal documentation, disclosure requirements</p>
+      </div>
+      <div class="domain-cell">
+        <div class="domain-icon">⚖️</div>
+        <p class="domain-name">Legal</p>
+        <p class="domain-desc">Multi-party claims, enforceability, negotiation strategy</p>
+      </div>
+      <div class="domain-cell">
+        <div class="domain-icon">💰</div>
+        <p class="domain-name">Financial</p>
+        <p class="domain-desc">Cost modeling, settlement analysis, insurance gap assessment</p>
+      </div>
+      <div class="domain-cell">
+        <div class="domain-icon">🏥</div>
+        <p class="domain-name">Health & Safety</p>
+        <p class="domain-desc">Occupant exposure, remediation sequencing, risk documentation</p>
+      </div>
+      <div class="domain-cell">
+        <div class="domain-icon">🔗</div>
+        <p class="domain-name">Process & Governance</p>
+        <p class="domain-desc">Framework design, evidence engineering, stakeholder coordination</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <p class="cta-label">What came next</p>
+  <h2 class="cta-title">The program I built in response.</h2>
+  <p class="cta-body">The case study that follows documents how I structured the response — the governance framework, the parallel workstreams, the evidence engineering, the financial modeling, and the stakeholder strategy. It is presented as a professional case study because that is exactly what it is.</p>
+  <a href="https://jennifergroh17-pro.github.io/Case-Study/high_risk_remediation_case_study.html" class="cta-button"><span>→</span> Read the Case Study</a>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span>Jennifer Groh &mdash; Program Manager · Instructional Designer · PMP</span>
+  <a href="mailto:jennifergroh17@gmail.com">Get in Touch</a>
+</div>
+
+</body>
+</html>
