@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>High-Risk Remediation Program | Jennifer Groh</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --ink-light: #3d3d5c;
+    --cream: #f5f2ec;
+    --warm-white: #faf8f5;
+    --gold: #b8860b;
+    --gold-light: #d4a017;
+    --rust: #8b3a3a;
+    --sage: #4a6741;
+    --rule: #d6d0c4;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--warm-white);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(245,242,236,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-name {
+    font-family: var(--serif);
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 56px;
+  }
+  .hero-left {
+    background: var(--ink);
+    padding: 5rem 4rem 5rem 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(184,134,11,0.15) 0%, transparent 70%);
+  }
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px; height: 1px;
+    background: var(--gold-light);
+  }
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 2rem;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+  .hero-desc {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.65);
+    max-width: 38ch;
+    line-height: 1.75;
+    margin-bottom: 3rem;
+  }
+  .hero-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .hero-meta-row {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.04em;
+  }
+  .hero-meta-row strong {
+    color: rgba(255,255,255,0.75);
+    font-weight: 500;
+  }
+
+  .hero-right {
+    background: var(--cream);
+    padding: 5rem 5rem 5rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  .stat-block {
+    border-left: 3px solid var(--gold);
+    padding-left: 1.5rem;
+    opacity: 0;
+    transform: translateX(20px);
+    animation: slidein 0.5s ease forwards;
+  }
+  .stat-block:nth-child(1) { animation-delay: 0.2s; }
+  .stat-block:nth-child(2) { animation-delay: 0.35s; }
+  .stat-block:nth-child(3) { animation-delay: 0.5s; }
+  .stat-block:nth-child(4) { animation-delay: 0.65s; }
+  .stat-block:nth-child(5) { animation-delay: 0.8s; }
+
+  @keyframes slidein {
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+  .stat-value {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .stat-sub {
+    font-size: 0.82rem;
+    color: var(--ink-light);
+    margin-top: 0.2rem;
+  }
+
+  /* ── MAIN CONTENT ── */
+  main { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+
+  /* ── SECTION PATTERN ── */
+  section {
+    padding: 5rem 0;
+    border-bottom: 1px solid var(--rule);
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  section:last-child { border-bottom: none; }
+
+  .section-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .section-eyebrow::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+  .section-body {
+    font-size: 1rem;
+    color: var(--ink-light);
+    line-height: 1.8;
+    max-width: 66ch;
+  }
+  .section-body p + p { margin-top: 1rem; }
+
+  /* ── CALLOUT QUOTE ── */
+  .callout {
+    background: var(--ink);
+    color: #fff;
+    padding: 2.5rem 3rem;
+    margin: 3rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .callout::before {
+    content: '\201C';
+    font-family: var(--serif);
+    font-size: 8rem;
+    line-height: 1;
+    color: rgba(184,134,11,0.2);
+    position: absolute;
+    top: -0.5rem; left: 1.5rem;
+  }
+  .callout-text {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    line-height: 1.5;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+    font-style: italic;
+  }
+  .callout-attr {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.5);
+    margin-top: 1rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── WORKSTREAMS GRID ── */
+  .workstream-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    margin-top: 2.5rem;
+    border: 1px solid var(--rule);
+  }
+  .workstream-card {
+    background: var(--warm-white);
+    padding: 1.75rem;
+    transition: background 0.2s;
+  }
+  .workstream-card:hover { background: var(--cream); }
+  .ws-icon {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+  }
+  .ws-title {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+  .ws-desc {
+    font-size: 0.83rem;
+    color: var(--ink-light);
+    line-height: 1.6;
+  }
+
+  /* ── RISK DOMAINS ── */
+  .risk-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .risk-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem;
+    border: 1px solid var(--rule);
+    background: var(--warm-white);
+  }
+  .risk-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--rust);
+    flex-shrink: 0;
+    margin-top: 0.45rem;
+  }
+  .risk-text { font-size: 0.88rem; color: var(--ink-light); line-height: 1.5; }
+  .risk-text strong { color: var(--ink); display: block; font-size: 0.9rem; margin-bottom: 0.2rem; }
+
+  /* ── GOVERNANCE CONTROLS ── */
+  .control-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .control-row:last-child { border-bottom: none; }
+  .control-num {
+    font-family: var(--serif);
+    font-size: 2rem;
+    color: var(--rule);
+    flex-shrink: 0;
+    line-height: 1;
+    min-width: 2.5rem;
+  }
+  .control-content {}
+  .control-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+  }
+  .control-desc { font-size: 0.87rem; color: var(--ink-light); line-height: 1.6; }
+
+  /* ── OUTCOMES ── */
+  .outcomes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+  .outcome-card {
+    padding: 2rem 1.5rem;
+    background: var(--cream);
+    border-top: 3px solid var(--gold);
+  }
+  .outcome-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+  .outcome-title {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .outcome-desc { font-size: 0.85rem; color: var(--ink-light); line-height: 1.6; }
+
+  /* ── SKILLS FOOTER ── */
+  .skills-section {
+    background: var(--ink);
+    padding: 5rem 2rem;
+    margin-top: 2rem;
+  }
+  .skills-inner { max-width: 900px; margin: 0 auto; }
+  .skills-header {
+    font-family: var(--serif);
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    color: #fff;
+    margin-bottom: 0.75rem;
+  }
+  .skills-sub {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 3rem;
+    max-width: 50ch;
+  }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .skill-cell {
+    background: var(--ink);
+    padding: 1.5rem;
+    transition: background 0.2s;
+  }
+  .skill-cell:hover { background: rgba(255,255,255,0.04); }
+  .skill-cat {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 0.6rem;
+  }
+  .skill-name {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.5;
+  }
+
+  /* ── CONTACT BAR ── */
+  .contact-bar {
+    background: var(--gold);
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .contact-bar span {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--ink);
+  }
+  .contact-bar a {
+    background: var(--ink);
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1.5rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: opacity 0.2s;
+  }
+  .contact-bar a:hover { opacity: 0.8; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 4rem 2rem 3rem; }
+    .hero-right { padding: 3rem 2rem 4rem; }
+    .outcomes-grid { grid-template-columns: 1fr; }
+    .risk-list { grid-template-columns: 1fr; }
+    nav { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-name">Jennifer Groh</span>
+  <ul class="nav-links">
+    <li><a href="#problem">Problem</a></li>
+    <li><a href="#governance">Governance</a></li>
+    <li><a href="#workstreams">Workstreams</a></li>
+    <li><a href="#evidence">Evidence</a></li>
+    <li><a href="#outcomes">Outcomes</a></li>
+    <li><a href="#skills">Skills</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Portfolio Case Study</p>
+    <h1 class="hero-title">High-Risk Residential<br><em>Remediation Program</em></h1>
+    <p class="hero-desc">A complex, multi-track program built from scratch under conditions of structural risk, regulatory exposure, and significant financial consequences — managed with the same discipline as any enterprise program.</p>
+    <div class="hero-meta">
+      <p class="hero-meta-row"><strong>Role:</strong> Program Lead (Solo Operator)</p>
+      <p class="hero-meta-row"><strong>Domain:</strong> Property / Legal / Compliance / Risk</p>
+      <p class="hero-meta-row"><strong>Methodology:</strong> Hybrid Agile / Structured Governance</p>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="stat-block">
+      <p class="stat-label">Challenge Type</p>
+      <p class="stat-value">Systemic Failure Response</p>
+      <p class="stat-sub">Structural · Environmental · Regulatory · Financial</p>
+    </div>
+    <div class="stat-block">
+      <p class="stat-label">Scope</p>
+      <p class="stat-value">5 Parallel Workstreams</p>
+      <p class="stat-sub">Legal, Evidence, Finance, Health & Safety, Stakeholder Comms</p>
+    </div>
+    <div class="stat-block">
+      <p class="stat-label">Governance Controls</p>
+      <p class="stat-value">Full Framework Built</p>
+      <p class="stat-sub">Single source of truth · Formal addenda · Evidence-to-claim traceability</p>
+    </div>
+    <div class="stat-block">
+      <p class="stat-label">Stakeholder Tracks</p>
+      <p class="stat-value">3 Defendant Tracks</p>
+      <p class="stat-sub">Legal, technical, and compliance domains with overlapping regulatory frameworks</p>
+    </div>
+    <div class="stat-block">
+      <p class="stat-label">Primary Outcome</p>
+      <p class="stat-value">Controlled, Defensible Position</p>
+      <p class="stat-sub">Multiple resolution paths preserved · Financial floor modeled · Claims traceable</p>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main>
+
+  <!-- PROBLEM -->
+  <section id="problem">
+    <p class="section-eyebrow">01 — Problem Statement</p>
+    <h2 class="section-title">This wasn't a repair problem.<br>It was a program problem.</h2>
+    <div class="section-body">
+      <p>Post-purchase discovery of widespread property defects across structural, environmental, electrical, and permitting domains created a situation most people would handle reactively — one issue at a time, losing leverage at every step.</p>
+      <p>The key insight came early: isolated fixes weren't just insufficient, they were dangerous. Each uncoordinated action created legal exposure, damaged negotiation position, and failed to account for interdependencies between failure domains. This required a reframe — from "repair dispute" to "systemic failure requiring program-level intervention."</p>
+      <p>That reframe changed everything. It determined how documentation was built, how stakeholders were managed, how evidence was engineered, and how financial scenarios were modeled. It also established the governing standard that would guide every subsequent decision: <em>can this withstand hostile review?</em></p>
+    </div>
+  </section>
+
+  <!-- GOVERNANCE -->
+  <section id="governance">
+    <p class="section-eyebrow">02 — Governance & Control Framework</p>
+    <h2 class="section-title">Structure before action.<br>Every time.</h2>
+    <div class="section-body">
+      <p>A governance framework was established before any external-facing action was taken. The goal: eliminate ambiguity, prevent scope creep, and ensure that every claim made — to attorneys, insurers, mediators, or courts — was traceable back to documented evidence.</p>
+    </div>
+
+    <div style="margin-top: 2rem;">
+      <div class="control-row">
+        <span class="control-num">01</span>
+        <div class="control-content">
+          <p class="control-title">Master Complaint as Single Source of Truth</p>
+          <p class="control-desc">All claims, positions, and representations flowed from one controlled document. No verbal commitments, no informal characterizations. Every stakeholder worked from the same baseline, updated only through formal addenda.</p>
+        </div>
+      </div>
+      <div class="control-row">
+        <span class="control-num">02</span>
+        <div class="control-content">
+          <p class="control-title">Formal Addenda for All Scope Changes</p>
+          <p class="control-desc">New evidence, new claims, and new risk findings were incorporated through versioned addenda rather than informal updates. This preserved a clear audit trail and prevented retroactive reframing by opposing parties.</p>
+        </div>
+      </div>
+      <div class="control-row">
+        <span class="control-num">03</span>
+        <div class="control-content">
+          <p class="control-title">Evidence-to-Claim Traceability</p>
+          <p class="control-desc">Every claim was mapped to specific documentary evidence before it was asserted. Speculative or unprovable items were deliberately excluded — not because they weren't real, but because unverifiable claims erode credibility on the claims that matter.</p>
+        </div>
+      </div>
+      <div class="control-row">
+        <span class="control-num">04</span>
+        <div class="control-content">
+          <p class="control-title">Parallel vs. Sequential Execution Protocol</p>
+          <p class="control-desc">Where legally permissible, workstreams ran concurrently to accelerate progress. Sequential execution was applied where regulatory or contractual requirements dictated. The hybrid model was explicit, documented, and coordinated — not assumed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALLOUT 1 -->
+  <div class="callout" style="margin: 0 0 0 0;">
+    <p class="callout-text">Every time I slowed down long enough to get organized, the situation improved. Every time I was tempted to just fix the next thing, the risk multiplied.</p>
+    <p class="callout-attr">— Lessons Learned, Program Retrospective</p>
+  </div>
+
+  <!-- WORKSTREAMS -->
+  <section id="workstreams">
+    <p class="section-eyebrow">03 — Program Workstreams</p>
+    <h2 class="section-title">Five tracks.<br>One integrated program.</h2>
+    <div class="section-body">
+      <p>Each workstream was interdependent. Evidence development informed legal strategy. Financial modeling shaped negotiation tactics. Health and safety documentation drove regulatory framing. Managing those interdependencies — without letting one track block another — was the execution challenge.</p>
+    </div>
+
+    <div class="workstream-grid">
+      <div class="workstream-card">
+        <div class="ws-icon">⚖️</div>
+        <p class="ws-title">Legal Strategy</p>
+        <p class="ws-desc">Multi-defendant track management across seller, contractors, and appraisal parties. Claim hierarchy, enforceability standards, and escalation sequencing.</p>
+      </div>
+      <div class="workstream-card">
+        <div class="ws-icon">🗂️</div>
+        <p class="ws-title">Evidence Engineering</p>
+        <p class="ws-desc">Indexed repository of inspection reports, video documentation, photographs, and cost estimates. Access controls and visibility disclosures built in to preempt counterarguments.</p>
+      </div>
+      <div class="workstream-card">
+        <div class="ws-icon">📊</div>
+        <p class="ws-title">Financial Modeling</p>
+        <p class="ws-desc">Rebuild vs. remediation cost scenarios, insurance replacement analysis, settlement floor/ceiling modeling, and staggered payment structures with enforcement protections.</p>
+      </div>
+      <div class="workstream-card">
+        <div class="ws-icon">🏥</div>
+        <p class="ws-title">Health & Safety Risk</p>
+        <p class="ws-desc">Environmental contamination, structural integrity, and biohazard exposure documented with engineering and environmental reports. Condition classifications mapped to regulatory standards.</p>
+      </div>
+      <div class="workstream-card">
+        <div class="ws-icon">📣</div>
+        <p class="ws-title">Stakeholder Communications</p>
+        <p class="ws-desc">Controlled information flow across sellers, insurers, legal counsel, mediators, and contractors. Language risk protocols. Enforceability prioritized over speed at every stage.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RISK -->
+  <section id="risk">
+    <p class="section-eyebrow">04 — Risk Identification & Management</p>
+    <h2 class="section-title">Named risks are<br>manageable risks.</h2>
+    <div class="section-body">
+      <p>Risk management emphasized explicit documentation of both known and unknown risks — avoiding assumptions that could compromise future claims. The approach: categorize, document, mitigate, and avoid overstating. Credibility in high-stakes environments is a resource. It has to be managed as carefully as budget.</p>
+    </div>
+    <div class="risk-list">
+      <div class="risk-item">
+        <span class="risk-dot"></span>
+        <div class="risk-text"><strong>Structural Integrity</strong>Foundation and load-bearing failures with engineering documentation.</div>
+      </div>
+      <div class="risk-item">
+        <span class="risk-dot"></span>
+        <div class="risk-text"><strong>Environmental Contamination</strong>Condition 3 fungal growth, biohazard contamination, environmental remediation requirements.</div>
+      </div>
+      <div class="risk-item">
+        <span class="risk-dot"></span>
+        <div class="risk-text"><strong>Regulatory & Compliance</strong>Permitting violations, unlicensed contractor work on federal VA documentation, RESPA violations.</div>
+      </div>
+      <div class="risk-item">
+        <span class="risk-dot"></span>
+        <div class="risk-text"><strong>Financial Exposure</strong>Settlement floor modeling, staggered payment risk, insurance replacement gap analysis.</div>
+      </div>
+      <div class="risk-item">
+        <span class="risk-dot"></span>
+        <div class="risk-text"><strong>Health Exposure</strong>Familial occupant exposure to environmental hazards while remediation proceeds.</div>
+      </div>
+      <div class="risk-item">
+        <span class="risk-dot"></span>
+        <div class="risk-text"><strong>Credibility Risk</strong>Speculative or unverifiable claims excluded to protect the integrity of provable ones.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVIDENCE -->
+  <section id="evidence">
+    <p class="section-eyebrow">05 — Evidence Engineering</p>
+    <h2 class="section-title">Documentation<br>is leverage.</h2>
+    <div class="section-body">
+      <p>The evidence framework was built with one goal: make every claim irrefutable without assistance. Inspection reports, engineering findings, environmental assessments, photographic documentation, and cost analyses were indexed, cross-referenced, and mapped directly to specific allegations.</p>
+      <p>Explicit access and visibility disclosures were built into the repository structure — not as an afterthought, but as a design feature. Controlling what opposing parties could see and when was part of the strategy. Once everything was documented and organized, the tenor of conversations changed. Arguments became harder to make. Decisions became calmer.</p>
+    </div>
+  </section>
+
+  <!-- CALLOUT 2 -->
+  <div class="callout">
+    <p class="callout-text">Numbers have a calming effect. When I could model scenarios instead of guessing outcomes, decisions felt less emotional and more grounded. Financial clarity reduced stress and improved judgment.</p>
+    <p class="callout-attr">— Lessons Learned, Program Retrospective</p>
+  </div>
+
+  <!-- OUTCOMES -->
+  <section id="outcomes">
+    <p class="section-eyebrow">06 — Outcomes & Value Delivered</p>
+    <h2 class="section-title">Controlled position.<br>Preserved options.</h2>
+    <div class="section-body">
+      <p>The program successfully elevated the situation from a repair dispute to a documented systemic failure requiring structured resolution — a distinction that changes leverage, changes legal exposure, and changes how every stakeholder engages.</p>
+    </div>
+    <div class="outcomes-grid">
+      <div class="outcome-card">
+        <div class="outcome-icon">🛡️</div>
+        <p class="outcome-title">Risk Containment</p>
+        <p class="outcome-desc">All risk domains named, documented, and addressed through parallel mitigation strategies. No uncontrolled exposure left untracked.</p>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-icon">📐</div>
+        <p class="outcome-title">Financial Clarity</p>
+        <p class="outcome-desc">Settlement floors, remediation scenarios, and insurance gaps modeled with defensible methodology. Negotiation anchors established before any discussions opened.</p>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-icon">📁</div>
+        <p class="outcome-title">Defensible Documentation</p>
+        <p class="outcome-desc">Full evidence index, claim-to-evidence traceability, and QA standard of surviving hostile review. Legal team able to engage immediately with a complete evidentiary foundation.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- SKILLS -->
+<div class="skills-section" id="skills">
+  <div class="skills-inner">
+    <h2 class="skills-header">Skills Demonstrated</h2>
+    <p class="skills-sub">Competencies applied in this program — directly transferable to Program Manager, Product Operations, Risk & Compliance, and Client Escalation Leadership roles.</p>
+    <div class="skills-grid">
+      <div class="skill-cell">
+        <p class="skill-cat">Governance</p>
+        <p class="skill-name">Framework design · Single source of truth · Change control · Audit trails</p>
+      </div>
+      <div class="skill-cell">
+        <p class="skill-cat">Risk Management</p>
+        <p class="skill-name">Risk identification · Domain categorization · Mitigation planning · Credibility management</p>
+      </div>
+      <div class="skill-cell">
+        <p class="skill-cat">Financial Analysis</p>
+        <p class="skill-name">Scenario modeling · Cost-benefit analysis · Negotiation anchoring · Settlement floor/ceiling</p>
+      </div>
+      <div class="skill-cell">
+        <p class="skill-cat">Stakeholder Management</p>
+        <p class="skill-name">Multi-party coordination · Information flow control · Strategic communication · Regulatory engagement</p>
+      </div>
+      <div class="skill-cell">
+        <p class="skill-cat">Program Execution</p>
+        <p class="skill-name">Parallel workstream management · Hybrid execution model · Interdependency coordination</p>
+      </div>
+      <div class="skill-cell">
+        <p class="skill-cat">Documentation & QA</p>
+        <p class="skill-name">Evidence engineering · Claim traceability · Hostile-review standard · Compliance alignment</p>
+      </div>
+      <div class="skill-cell">
+        <p class="skill-cat">Leadership</p>
+        <p class="skill-name">Systems thinking · Emotional discipline · Ethical restraint · Outcome-focused decision making</p>
+      </div>
+      <div class="skill-cell">
+        <p class="skill-cat">Problem Framing</p>
+        <p class="skill-name">Systemic reframing · Scope definition · End-state clarity · Strategic boundary setting</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-bar">
+  <span>Jennifer Groh &mdash; Program Manager · Instructional Designer · PMP</span>
+  <a href="mailto:jennifergroh17@gmail.com">Get in Touch</a>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Scroll-triggered section reveals
+  const sections = document.querySelectorAll('section');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.targ
